@@ -1,0 +1,34 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Search Results
+{% endblock %}
+
+{% block main %}
+
+    <!-- http://getbootstrap.com/docs/4.1/components/alerts/ -->
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading">Search results:</h4>
+    </div>
+
+    <table id="SearchResultsTable" class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">ISBN Number</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">year</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books%}
+            <tr>
+                <td scope="col">{{ book.isbn }}</td>
+                <td scope="col">{{ book.title }}</td>
+                <td scope="col">{{ book.author }}</td>
+                <td scope="col">{{ book.year }}</td>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

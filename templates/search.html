@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Register
+{% endblock %}
+
+{% block main %}
+    <form action="/search" method="post" id="searchForm">
+        <div class="form-group">
+            <input autocomplete="off" autofocus class="form-control" id="isbn" name="isbn" placeholder="ISBN number" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="title" placeholder="Title" type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control" name="author" placeholder="Book Author" type="text">
+        </div>
+        <button class="btn btn-primary" type="submit">Search</button>
+    </form>
+
+    <script>
+    </script>
+{% endblock %}

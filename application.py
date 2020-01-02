@@ -6,6 +6,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
 # from werkzeug.exceptions import default_exceptions, HTTPException, InternalServerError
 from werkzeug.security import check_password_hash, generate_password_hash
+from helpers import searchBooks
 
 app = Flask(__name__)
 
@@ -25,10 +26,6 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/")
 def index():
     return render_template("index.html")
-
-@app.route("/page1")
-def more():
-    return render_template("page1.html")
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
@@ -124,3 +121,32 @@ def logout():
 
     # Redirect user to login form
     return redirect("/")
+
+@app.route("/page1")
+def page1():
+    return render_template("page1.html")
+
+@app.route("/search", methods=["GET", "POST"])
+def search():
+    
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "POST":
+
+        # Ensure username was submitted
+        bookISBN = request.form.get("isbn")
+        bookTitle = request.form.get("title")
+        bookAuthor = request.form.get("author")
+
+        results = searchBooks(bookISBN,bookTitle,bookAuthor)
+        
+        
+        if bookISBN == "" and bookTitle == "" and bookAuthor == "":
+            return render_template("apology.html", message="must provide at least one search term"), 400
+        elif len(results) == 0:
+            return render_template("apology.html", message="search criteria not found in the database"), 400
+        else:
+            return render_template("searchResults.html", books = results)
+ 
+    
+    else:
+        return render_template("search.html")
