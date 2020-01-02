@@ -122,9 +122,21 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/page1")
-def page1():
-    return render_template("page1.html")
+@app.route("/books")
+def books():
+    return render_template("search.html")
+
+
+@app.route("/books/<int:book_id>")
+def book(book_id):
+    # Make sure the book exists.
+    book = db.execute("SELECT * FROM books WHERE book_id = :id", {"id": book_id}).fetchone()
+    if book is None:
+        return render_template("apology.html", message="No such book.")
+    else:
+        return render_template("book.html", book=book)
+
+
 
 @app.route("/search", methods=["GET", "POST"])
 def search():

@@ -34,5 +34,12 @@ def searchBooks(bookISBN, bookTitle, bookAuthor):
         resultsA = db.execute("SELECT * FROM books WHERE author LIKE :author",
                     {"author": '%'+bookAuthor+'%'}).fetchall()
         results.extend(resultsA)
-      
+    results = removeDuplicates(results)  
     return results
+
+def removeDuplicates(oldList): 
+    newList = [] 
+    for element in oldList: 
+        if element not in newList: 
+            newList.append(element) 
+    return newList
