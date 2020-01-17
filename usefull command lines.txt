@@ -9,7 +9,10 @@ export FLASK_APP=application.py
 export FLASK_DEBUG=1
 export DATABASE_URL=<URI>
 
-
+Heroku
 URI = postgres://ttbfeygxyebmud:3f45d61e7319c8c7362e40e9116f90e13bae1459fbae3c02cb1d6e1ac7549582@ec2-54-217-234-157.eu-west-1.compute.amazonaws.com:5432/d45ptjkj9vseu9
 
+Goodreads
+key: tWoJxAvYuLuEfOcSKkUOLw
+secret: 0oLHcMpsADm5Sf2XnZtvheesmvkXm9lIXoPCbOFg
 
