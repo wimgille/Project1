@@ -13,9 +13,7 @@
 
         <!-- Required stylesheet to work with bootstrap table -->
         <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css" rel="stylesheet">
-        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css>
-
-        <link href="/static/styles.css" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.css" rel="stylesheet">
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -43,7 +41,6 @@
                 {% if session.user_id %}
                     <ul class="navbar-nav mr-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/search">Search</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/books">Book</a></li>
                     </ul>
                     <ul class="navbar-nav ml-auto mt-2">
                         <li class="nav-item"><a class="nav-link" href="/logout">Log Out</a></li>
@@ -61,7 +58,7 @@
             {% block main %}{% endblock %}
         </main>
 
-        <footer class="small text-center text-muted">
+        <footer class="small text-center text-muted" style="padding-bottom: 20px;">
             Data provided for free by <a href="https://goodreads.com/">Goodreads</a>. View <a href="https://www.goodreads.com/about/terms">Goodreads’s Terms of Use</a>.
         </footer>
 

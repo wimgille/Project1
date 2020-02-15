@@ -1,19 +1,13 @@
 # Project1
 Project1 on CS50W 2019. In this project, we’ll build a book review website.
 
-application.py is the main Flask application
+application.py is the main Flask application, should you require the database URI, just let me know.
 
-xxxxxxxxxxxxxxxxxxxxx
-
-0) Registration: Users should be able to register for your website, providing (at minimum) a username and password. [done]
-1) Login: Users, once registered, should be able to log in to your website with their username and password. [done]
-2) Logout: Logged in users should be able to log out of the site. [done]
-3) Import: Provided for you in this project is a file called books.csv, which is a spreadsheet in CSV format of 5000 different books. Each one has an ISBN number, a title, an author, and a publication year. In a Python file called import.py separate from your web application, write a program that will take the books and import them into your PostgreSQL database. You will first need to decide what table(s) to create, what columns those tables should have, and how they should relate to one another. Run this program by running python3 import.py to import the books into your database, and submit this program with the rest of your project code. [done]
-4) Search: Once a user has logged in, they should be taken to a page where they can search for a book. Users should be able to type in the ISBN number of a book, the title of a book, or the author of a book. After performing the search, your website should display a list of possible matching results, or some sort of message if there were no matches. If the user typed in only part of a title, ISBN, or author name, your search page should find matches for those as well! [done]
-5) Book Page: When users click on a book from the results of the search page, they should be taken to a book page, with details about the book: its title, author, publication year, ISBN number, and any reviews that users have left for the book on your website. [wip]
-6) Review Submission: On the book page, users should be able to submit a review: consisting of a rating on a scale of 1 to 5, as well as a text component to the review where the user can write their opinion about a book. Users should not be able to submit multiple reviews for the same book. [done]
-7) Goodreads Review Data: On your book page, you should also display (if available) the average rating and number of ratings the work has received from Goodreads. [done]
-8) API Access: If users make a GET request to your website’s /api/<isbn> route, where <isbn> is an ISBN number, your website should return a JSON response containing the book’s title, author, publication date, ISBN number, review count, and average score. The resulting JSON should follow the the right format. If the requested ISBN number isn’t in your database, your website should return a 404 error.
-9) You should be using raw SQL commands (as via SQLAlchemy’s execute method) in order to make database queries. You should not use the SQLAlchemy ORM (if familiar with it) for this project.
-10) In README.md, include a short writeup describing your project, what’s contained in each file, and (optionally) any other additional information the staff should know about your project.
-11) If you’ve added any Python packages that need to be installed in order to run your web application, be sure to add them to requirements.txt!
+In this application users can find the following elements:
+0) Registration, Login and Logout. Passwords are hashed using werkzeug
+1) There is a database with 5,002 books to search on 
+2) Users can search for a book based on ISBN number, title and / or the author of a book. On the search results page, users can click through to see the details of a book on the Book Page
+3) Book Page: This page shows details on a the book: its title, author, publication year, ISBN number, and any reviews that users might have left for the book on the  website.
+4) On the book page, users can submit a review consisting of a rating on a scale of 1 to 5, as well as a text component
+5) The Book Page also contains data from Goodreads, which have been retrieved using an API
+6) API Access: Users can make a GET request to the website's /api/<isbn> route, where <isbn> is an ISBN number. If the ISBN number is in the database, the API returns a JSON response containing the book’s title, author, publication date, ISBN number, review count, and average score.

@@ -1,7 +1,7 @@
 import os
 import datetime
 
-from flask import Flask, session, render_template, request, redirect
+from flask import Flask, session, render_template, request, redirect, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -140,10 +140,18 @@ def book(book_id):
         # Collect the reviews in our own dbse
         reviews = db.execute("SELECT * FROM reviews WHERE book_id = :id", {"id": book_id}).fetchall()
 
+        # Decide if the user can leave a review
+        review_user = db.execute("SELECT review_id FROM reviews WHERE book_id = :book_id AND user_id = :user_id",
+                                {"book_id": book_id,
+                                "user_id": session["user_id"]}).fetchone()
+        if review_user == None:
+            show = True
+        else:
+            show = False
 
         # Collect the rating statistics from goodreads
         rating_tot = GetRatings(book.isbn)
-        return render_template("book.html", book=book, rating=rating_tot)
+        return render_template("book.html", book=book, rating=rating_tot, reviews=reviews, show=show)
 
 @app.route("/submit", methods=["GET", "POST"])
 def submitReview():
@@ -208,3 +216,29 @@ def search():
     # User reached route via GET (as by clicking a link or via redirect)
     else:
         return render_template("search.html")
+
+@app.route("/api/<string:isbn>", methods=["GET"])
+def api(isbn):
+    
+    # User reached route via POST (as by submitting a form via POST)
+    if request.method == "GET":
+        
+        # Make sure ISBN number exists.
+        book = db.execute("SELECT * FROM books WHERE isbn = :isbn_nr", {"isbn_nr" : isbn}).fetchone()
+        if book is None:
+            return jsonify({"error": "Invalid isbn number"}), 404
+
+        # Get all details on the book. 
+        ratings = GetRatings(isbn)
+        return jsonify({
+              "title": book.title,
+              "author": book.author,
+              "publication year": book.year,
+              "ISBN number": book.isbn,
+              "review count": ratings[1],
+              "review average score": ratings[0]
+            }) 
+
+    else:
+        return render_template("apology.html", message="Method not allowed"), 405
+

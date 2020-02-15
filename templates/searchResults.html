@@ -22,10 +22,15 @@
         <tbody>
             {% for book in books%}
             <tr>
-                <td scope="col">{{ book.isbn }}</td>
+                <td scope="col">
+                    <a href="{{ url_for('book', book_id=book.book_id) }}">
+                        {{ book.isbn }}
+                    </a>
+                </td>
                 <td scope="col">{{ book.title }}</td>
                 <td scope="col">{{ book.author }}</td>
                 <td scope="col">{{ book.year }}</td>
+            </tr>
             {% endfor %}
         </tbody>
     </table>

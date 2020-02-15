@@ -52,7 +52,7 @@ def removeDuplicates(oldList):
     return newList
 
 def GetRatings(isbn):
-    """ This functions calls the goodreads API and retrieves the avg rating and the number of ratings """
+    """ This functions calls the goodreads API and retrieves the avg rating and the number of ratings for any given isbn nr"""
 
     # Collect the XML file using the Goodreads API    
     url = 'https://www.goodreads.com/book/isbn/'+isbn+'?key=tWoJxAvYuLuEfOcSKkUOLw'
